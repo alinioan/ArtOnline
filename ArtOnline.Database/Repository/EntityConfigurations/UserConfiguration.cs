@@ -36,5 +36,10 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
             .IsRequired();
         builder.Property(e => e.UpdatedAt)
             .IsRequired();
+
+        builder.HasOne(u => u.ArtistProfile)
+            .WithOne(ap => ap.User)
+            .HasForeignKey<ArtistProfile>(ap => ap.UserId);
+
     }
 }

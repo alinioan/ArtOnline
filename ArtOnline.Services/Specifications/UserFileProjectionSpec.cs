@@ -9,7 +9,7 @@ namespace ArtOnline.Services.Specifications;
 /// This is a specification to filter the user file entities and map it to and UserFileRecord object via the constructors.
 /// Note how the constructors call the base class's constructors. Also, this is a sealed class, meaning it cannot be further derived.
 /// </summary>
-public sealed class UserFileProjectionSpec : Specification<UserFile, UserFileRecord>
+public sealed class UserFileProjectionSpec : Specification<Collection, UserFileRecord>
 {
     /// <summary>
     /// Note that the specification projects the UserFile onto UserFileRecord together with the referenced User entity properties.
