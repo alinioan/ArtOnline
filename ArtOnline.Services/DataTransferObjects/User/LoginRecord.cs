@@ -1,4 +1,4 @@
-﻿namespace ArtOnline.Services.DataTransferObjects;
+﻿namespace ArtOnline.Services.DataTransferObjects.User;
 
 /// <summary>
 /// This is a DTO that contains the login request information.

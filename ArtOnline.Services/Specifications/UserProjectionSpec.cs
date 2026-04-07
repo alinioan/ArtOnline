@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ArtOnline.Database.Repository.Entities;
 using ArtOnline.Services.DataTransferObjects;
+using ArtOnline.Services.DataTransferObjects.User;
 
 namespace ArtOnline.Services.Specifications;
 

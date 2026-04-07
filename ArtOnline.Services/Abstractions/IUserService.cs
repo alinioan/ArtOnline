@@ -1,6 +1,7 @@
 ﻿using ArtOnline.Services.DataTransferObjects;
 using ArtOnline.Infrastructure.Requests;
 using ArtOnline.Infrastructure.Responses;
+using ArtOnline.Services.DataTransferObjects.User;
 
 namespace ArtOnline.Services.Abstractions;
 

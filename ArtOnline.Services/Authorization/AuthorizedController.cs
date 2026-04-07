@@ -4,6 +4,7 @@ using ArtOnline.Services.DataTransferObjects;
 using Microsoft.Extensions.Logging;
 using ArtOnline.Infrastructure.Handlers;
 using ArtOnline.Infrastructure.Responses;
+using ArtOnline.Services.DataTransferObjects.User;
 
 namespace ArtOnline.Services.Authorization;
 

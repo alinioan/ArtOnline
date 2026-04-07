@@ -10,6 +10,7 @@ using ArtOnline.Infrastructure.Errors;
 using ArtOnline.Infrastructure.Repositories.Interfaces;
 using ArtOnline.Infrastructure.Requests;
 using ArtOnline.Infrastructure.Responses;
+using ArtOnline.Services.DataTransferObjects.User;
 
 namespace ArtOnline.Services.Implementations;
 

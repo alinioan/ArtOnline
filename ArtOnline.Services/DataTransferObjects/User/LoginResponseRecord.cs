@@ -1,4 +1,4 @@
-﻿namespace ArtOnline.Services.DataTransferObjects;
+﻿namespace ArtOnline.Services.DataTransferObjects.User;
 
 /// <summary>
 /// This DTO is used to respond to a login with the JWT token and user information.

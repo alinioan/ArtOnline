@@ -1,6 +1,6 @@
 ﻿using ArtOnline.Database.Repository.Enums;
 
-namespace ArtOnline.Services.DataTransferObjects;
+namespace ArtOnline.Services.DataTransferObjects.User;
 
 /// <summary>
 /// This DTO is used to add a user, note that it doesn't have an id property because the id for the user entity should be added by the application.

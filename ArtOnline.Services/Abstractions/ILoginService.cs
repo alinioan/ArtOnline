@@ -1,4 +1,5 @@
 ﻿using ArtOnline.Services.DataTransferObjects;
+using ArtOnline.Services.DataTransferObjects.User;
 
 namespace ArtOnline.Services.Abstractions;
 

@@ -6,6 +6,7 @@ using ArtOnline.Services.DataTransferObjects;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using ArtOnline.Infrastructure.Configurations;
+using ArtOnline.Services.DataTransferObjects.User;
 
 namespace ArtOnline.Services.Implementations;
 

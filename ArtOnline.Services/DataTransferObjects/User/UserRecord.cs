@@ -1,6 +1,6 @@
 ﻿using ArtOnline.Database.Repository.Enums;
 
-namespace ArtOnline.Services.DataTransferObjects;
+namespace ArtOnline.Services.DataTransferObjects.User;
 
 /// <summary>
 /// This DTO is used to transfer information about a user within the application and to client application.

@@ -4,6 +4,7 @@ using ArtOnline.Infrastructure.Handlers;
 using ArtOnline.Infrastructure.Responses;
 using ArtOnline.Services.Abstractions;
 using ArtOnline.Services.DataTransferObjects;
+using ArtOnline.Services.DataTransferObjects.User;
 
 namespace ArtOnline.Api.Controllers;
 

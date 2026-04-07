@@ -1,4 +1,4 @@
-﻿namespace ArtOnline.Services.DataTransferObjects;
+﻿namespace ArtOnline.Services.DataTransferObjects.User;
 
 /// <summary>
 /// This DTO is used to update a user, the properties besides the id are nullable to indicate that they may not be updated if they are null.
