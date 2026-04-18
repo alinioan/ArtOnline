@@ -122,8 +122,22 @@ public class ArtworkService(IRepository<WebAppDatabaseContext> repository, IFile
                 var savedFile = fileRepository.SaveFile(artwork.ImageFile, GetImageDirectory(artwork.ArtistProfileId));
                 entity.ImageUrl = Path.Join(GetImageDirectory(artwork.ArtistProfileId), savedFile.Result);
             }
+
+            if (artwork.TagIds != null)
+            {
+                entity.ArtworkTags.Clear();
+
+                foreach (var tagId in artwork.TagIds)
+                {
+                    entity.ArtworkTags.Add(new ArtworkTag { ArtworkId = entity.Id, TagId = tagId });
+                }
+            }
             
             await repository.UpdateAsync(entity, cancellationToken);
+        }
+        else
+        {
+            return ServiceResponse.FromError(new(HttpStatusCode.NotFound, "Artwork not found!", ErrorCodes.EntityNotFound));
         }
         
         return ServiceResponse.ForSuccess();

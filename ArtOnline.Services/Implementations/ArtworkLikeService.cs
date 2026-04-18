@@ -19,13 +19,6 @@ public class ArtworkLikeService(IRepository<WebAppDatabaseContext> repository) :
         return ServiceResponse.ForSuccess(count);
     }
 
-    public async Task<ServiceResponse<bool>> HasUserLiked(Guid artworkId, Guid userId, CancellationToken cancellationToken = default)
-    {
-        var like = await repository.GetAsync(new ArtworkLikeSpec(artworkId, userId), cancellationToken);
-
-        return ServiceResponse.ForSuccess(like != null);
-    }
-
     public async Task<ServiceResponse> LikeArtwork(Guid artworkId, UserRecord requestingUser, CancellationToken cancellationToken = default)
     {
         var artwork = await repository.GetAsync(new ArtworkSpec(artworkId), cancellationToken);

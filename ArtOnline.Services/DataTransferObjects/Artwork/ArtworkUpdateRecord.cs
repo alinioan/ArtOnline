@@ -9,4 +9,5 @@ public class ArtworkUpdateRecord
     public string? Title { get; set; }
     public string? Description { get; set; }
     public IFormFile? ImageFile { get; set; }
+    public List<Guid>? TagIds { get; set; }
 }
