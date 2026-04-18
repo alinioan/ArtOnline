@@ -34,7 +34,7 @@ public class CollectionService(IRepository<WebAppDatabaseContext> repository) : 
 
     public async Task<ServiceResponse<PagedResponse<CollectionRecord>>> GetCollections(PaginationSearchQueryParams pagination, CancellationToken cancellationToken = default)
     {
-        var result = await repository.PageAsync(pagination, new CollectionProjectionSpec(pagination.Search), cancellationToken);
+        var result = await repository.PageAsync(pagination, new CollectionProjectionSpec(pagination.Search, false), cancellationToken);
 
         return ServiceResponse.ForSuccess(result);
     }
@@ -43,7 +43,7 @@ public class CollectionService(IRepository<WebAppDatabaseContext> repository) : 
     {
         var includePrivate = requestingUser?.Id == userId || requestingUser?.Role == UserRoleEnum.Admin;
 
-        var result = await repository.PageAsync(pagination, new CollectionProjectionSpec(userId), cancellationToken);
+        var result = await repository.PageAsync(pagination, new CollectionProjectionSpec(pagination.Search, includePrivate, userId), cancellationToken);
 
         return ServiceResponse.ForSuccess(result);
     }

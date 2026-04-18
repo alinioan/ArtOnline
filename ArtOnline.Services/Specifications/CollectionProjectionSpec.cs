@@ -33,10 +33,19 @@ public class CollectionProjectionSpec : Specification<Collection, CollectionReco
 
         var searchExpr = $"%{search.Replace(" ", "%")}%";
 
-        Query.Where(e => e.IsPrivate == false &&
-                         (EF.Functions.ILike(e.Name, searchExpr) ||
-                         EF.Functions.ILike(e.Description!, searchExpr)));
+        Query.Where(e => (EF.Functions.ILike(e.Name, searchExpr) ||
+                          EF.Functions.ILike(e.Description!, searchExpr)));
         
         
+    }
+    
+    public CollectionProjectionSpec(string? search, bool includePrivate) : this(search)
+    {
+        Query.Where(c => c.IsPrivate == includePrivate);
+    }
+
+    public CollectionProjectionSpec(string? search, bool includePrivate, Guid? userId) : this(search, includePrivate)
+    {
+        Query.Where(c => c.UserId == userId);
     }
 }
