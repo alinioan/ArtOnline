@@ -9,9 +9,22 @@ namespace ArtOnline.Services.Specifications;
 
 public class ArtworkProjectionSpec : Specification<Artwork, ArtworkRecord>
 {
-    public ArtworkProjectionSpec(Guid id) => Query.Where(a => a.Id == id);
+    public ArtworkProjectionSpec(bool orderByCreatedAt = false) =>
+        Query.OrderByDescending(a => a.CreatedAt, orderByCreatedAt)
+            .Select(a => new()
+            {
+                Id = a.Id,
+                Title = a.Title,
+                Description = a.Description,
+                ImageUrl = a.ImageUrl,
+                Shares = a.Shares,
+                Views = a.Views,
+                ArtistProfileId = a.ArtistProfileId,
+            });
+    
+    public ArtworkProjectionSpec(Guid id) : this() => Query.Where(a => a.Id == id);
 
-    public ArtworkProjectionSpec(string? search)
+    public ArtworkProjectionSpec(string? search) : this(true)
     {
         search = !string.IsNullOrWhiteSpace(search) ? search.Trim() : null;
 
@@ -25,9 +38,8 @@ public class ArtworkProjectionSpec : Specification<Artwork, ArtworkRecord>
         Query.Where(a => EF.Functions.ILike(a.Title, searchExpr));
     }
     
-    public ArtworkProjectionSpec(string? search, Guid? artistProfileId)
+    public ArtworkProjectionSpec(string? search, Guid? artistProfileId) : this(search)
     {
-        search = !string.IsNullOrWhiteSpace(search) ? search.Trim() : null;
-        
+        Query.Where(a => a.ArtistProfileId == artistProfileId);
     }
 }

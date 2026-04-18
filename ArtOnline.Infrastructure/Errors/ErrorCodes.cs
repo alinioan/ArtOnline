@@ -11,11 +11,13 @@ public enum ErrorCodes
     Unknown,
     TechnicalError,
     EntityNotFound,
+    EntityAlreadyExists,
+    AccessDenied,
     PhysicalFileNotFound,
     UserAlreadyExists,
     WrongPassword,
     CannotAdd,
     CannotUpdate,
     CannotDelete,
-    MailSendFailed
+    MailSendFailed,
 }

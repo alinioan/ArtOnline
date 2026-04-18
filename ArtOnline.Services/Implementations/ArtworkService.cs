@@ -58,7 +58,7 @@ public class ArtworkService(IRepository<WebAppDatabaseContext> repository, IFile
             return ServiceResponse.FromError(new(HttpStatusCode.Forbidden, "Only artists can add artworks!", ErrorCodes.CannotAdd));
         }
         
-        var artistProfile = await repository.GetAsync(new ArtistProfileSpec(artwork.ArtistProfileId), cancellationToken);
+        var artistProfile = await repository.GetAsync(new ArtistProfileSpec(artwork.ArtistProfileId, true), cancellationToken);
 
         if (artistProfile == null)
         {
@@ -94,10 +94,10 @@ public class ArtworkService(IRepository<WebAppDatabaseContext> repository, IFile
     {
         if (requestingUser != null && requestingUser.Role != UserRoleEnum.Artist)
         {
-            return ServiceResponse.FromError(new(HttpStatusCode.Forbidden, "Only artists can updated artworks!", ErrorCodes.CannotAdd));
+            return ServiceResponse.FromError(new(HttpStatusCode.Forbidden, "Only artists can updated artworks!", ErrorCodes.CannotUpdate));
         }
         
-        var artistProfile = await repository.GetAsync(new ArtistProfileSpec(artwork.ArtistProfileId), cancellationToken);
+        var artistProfile = await repository.GetAsync(new ArtistProfileSpec(artwork.ArtistProfileId, true), cancellationToken);
 
         if (artistProfile == null)
         {
@@ -143,7 +143,7 @@ public class ArtworkService(IRepository<WebAppDatabaseContext> repository, IFile
             return ServiceResponse.ForSuccess();
         }
         
-        var artistProfile = await repository.GetAsync(new ArtistProfileSpec(artwork.ArtistProfileId), cancellationToken);
+        var artistProfile = await repository.GetAsync(new ArtistProfileSpec(artwork.ArtistProfileId, true), cancellationToken);
 
         if (artistProfile == null)
         {
