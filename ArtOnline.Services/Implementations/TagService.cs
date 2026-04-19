@@ -31,7 +31,7 @@ public class TagService(IRepository<WebAppDatabaseContext> repository) : ITagSer
         return ServiceResponse.ForSuccess(result);
     }
 
-    public async Task<ServiceResponse> AddTag(TagRecord tag, UserRecord? requestingUser, CancellationToken cancellationToken = default)
+    public async Task<ServiceResponse> AddTag(TagAddRecord tag, UserRecord? requestingUser, CancellationToken cancellationToken = default)
     {
         if (requestingUser != null && requestingUser.Role != UserRoleEnum.Admin)
         {

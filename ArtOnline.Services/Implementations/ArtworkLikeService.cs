@@ -28,7 +28,7 @@ public class ArtworkLikeService(IRepository<WebAppDatabaseContext> repository) :
             return ServiceResponse.FromError(new(HttpStatusCode.NotFound, "Artwork not found!", ErrorCodes.EntityNotFound));
         }
 
-        var existing = await repository.GetAsync(new ArtworkLikeSpec(artworkId, requestingUser.Id), cancellationToken);
+        var existing = await repository.GetAsync(new ArtworkLikeSpec(requestingUser.Id, artworkId), cancellationToken);
 
         if (existing != null)
         {
@@ -46,7 +46,7 @@ public class ArtworkLikeService(IRepository<WebAppDatabaseContext> repository) :
 
     public async Task<ServiceResponse> UnlikeArtwork(Guid artworkId, UserRecord requestingUser, CancellationToken cancellationToken = default)
     {
-        var like = await repository.GetAsync(new ArtworkLikeSpec(artworkId, requestingUser.Id), cancellationToken);
+        var like = await repository.GetAsync(new ArtworkLikeSpec(requestingUser.Id, artworkId), cancellationToken);
 
         if (like == null)
         {

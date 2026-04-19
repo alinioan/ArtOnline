@@ -12,6 +12,7 @@ public class TagProjectionSpec : Specification<Tag, TagRecord>
             {
                 Id = t.Id,
                 Name = t.Name,
+                ArtworkIds = t.ArtworkTags.Select(at => at.ArtworkId).ToList()
             });
     
     public TagProjectionSpec(Guid id) : this() => Query.Where(t => t.Id == id);

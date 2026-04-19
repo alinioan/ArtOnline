@@ -11,7 +11,7 @@ namespace ArtOnline.Api.Controllers;
 [ApiController]
 [Route("api/[controller]/[action]")]
 public class CollectionController(
-    ILogger<ArtistProfileController> logger,
+    ILogger<CollectionController> logger,
     IUserService userService,
     ICollectionService collectionService)
     : AuthorizedController(logger, userService)
@@ -100,23 +100,23 @@ public class CollectionController(
 
     [Authorize]
     [HttpPut]
-    public async Task<ActionResult<RequestResponse>> AddArtwork([FromBody] Guid collectionId, [FromBody] Guid artworkId)
+    public async Task<ActionResult<RequestResponse>> AddArtwork([FromBody] CollectionArtworkRecord collectionArtwork)
     {
         var currentUser = await GetCurrentUser();
         
         return currentUser.Result != null
-            ? FromServiceResponse(await collectionService.AddArtworkToCollection(collectionId, artworkId, currentUser.Result))
+            ? FromServiceResponse(await collectionService.AddArtworkToCollection(collectionArtwork, currentUser.Result))
             : ErrorMessageResult(currentUser.Error);
     }
     
     [Authorize]
     [HttpDelete]
-    public async Task<ActionResult<RequestResponse>> RemoveArtwork([FromBody] Guid collectionId, [FromBody] Guid artworkId)
+    public async Task<ActionResult<RequestResponse>> RemoveArtwork([FromBody] CollectionArtworkRecord collectionArtwork)
     {
         var currentUser = await GetCurrentUser();
         
         return currentUser.Result != null
-            ? FromServiceResponse(await collectionService.RemoveArtworkFromCollection(collectionId, artworkId, currentUser.Result))
+            ? FromServiceResponse(await collectionService.RemoveArtworkFromCollection(collectionArtwork, currentUser.Result))
             : ErrorMessageResult(currentUser.Error);
     } 
 }

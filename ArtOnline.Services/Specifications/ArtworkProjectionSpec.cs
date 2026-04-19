@@ -20,6 +20,8 @@ public class ArtworkProjectionSpec : Specification<Artwork, ArtworkRecord>
                 Shares = a.Shares,
                 Views = a.Views,
                 ArtistProfileId = a.ArtistProfileId,
+                TagIds = a.ArtworkTags.Select(at => at.TagId).ToList(),
+                CollectionIds = a.CollectionArtworks.Select(ca => ca.CollectionId).ToList()
             });
     
     public ArtworkProjectionSpec(Guid id) : this() => Query.Where(a => a.Id == id);

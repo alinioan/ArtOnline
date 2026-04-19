@@ -6,4 +6,5 @@ public class ArtistProfileRecord
     public String? Bio { get; set; }
     
     public Guid UserId { get; set; }
+    public List<Guid>? ArtworkIds { get; set; }
 }

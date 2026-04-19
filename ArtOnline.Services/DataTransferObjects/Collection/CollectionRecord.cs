@@ -8,4 +8,6 @@ public class CollectionRecord
     public bool IsPrivate { get; set; }
     
     public Guid UserId { get; set; }
+
+    public List<Guid>? ArtworkIds { get; set; }
 }

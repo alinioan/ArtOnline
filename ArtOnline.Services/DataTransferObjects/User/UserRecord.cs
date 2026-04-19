@@ -12,4 +12,6 @@ public class UserRecord
     public string Name { get; set; } = null!;
     public string Email { get; set; } = null!;
     public UserRoleEnum Role { get; set; }
+    public List<Guid>? CollectionIds { get; set; }
+    public List<Guid>? LikedArtworkIds { get; set; }
 }

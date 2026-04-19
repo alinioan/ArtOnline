@@ -8,7 +8,7 @@ namespace ArtOnline.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]/[action]")]
-public class ArtworkLikeController(ILogger logger, IUserService userService, IArtworkLikeService likeService)
+public class ArtworkLikeController(ILogger<ArtworkLikeController> logger, IUserService userService, IArtworkLikeService likeService)
     : AuthorizedController(logger, userService)
 {
     [Authorize]

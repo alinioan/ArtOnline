@@ -16,6 +16,7 @@ public class CollectionProjectionSpec : Specification<Collection, CollectionReco
                 Description = c.Description,
                 IsPrivate = c.IsPrivate,
                 UserId = c.UserId,
+                ArtworkIds = c.CollectionArtworks.Select(ca => ca.ArtworkId).ToList()
             });
     
     public CollectionProjectionSpec(Guid id) : this() => Query.Where(c => c.Id == id);
@@ -41,7 +42,10 @@ public class CollectionProjectionSpec : Specification<Collection, CollectionReco
     
     public CollectionProjectionSpec(string? search, bool includePrivate) : this(search)
     {
-        Query.Where(c => c.IsPrivate == includePrivate);
+        if (!includePrivate)
+        {
+            Query.Where(c => c.IsPrivate == includePrivate);
+        }
     }
 
     public CollectionProjectionSpec(string? search, bool includePrivate, Guid? userId) : this(search, includePrivate)

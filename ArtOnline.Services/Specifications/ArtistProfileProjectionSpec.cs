@@ -15,6 +15,7 @@ public class ArtistProfileProjectionSpec : Specification<ArtistProfile, ArtistPr
                 Bio = a.Bio,
                 UserId = a.UserId,
                 Id = a.Id,
+                ArtworkIds = a.Artworks.Select(art => art.Id).ToList()
             });    
     }
     

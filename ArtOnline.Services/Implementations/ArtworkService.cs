@@ -53,7 +53,7 @@ public class ArtworkService(IRepository<WebAppDatabaseContext> repository, IFile
 
     public async Task<ServiceResponse> AddArtwork(ArtworkAddRecord artwork, UserRecord? requestingUser, CancellationToken cancellationToken = default)
     {
-        if (requestingUser != null && requestingUser.Role != UserRoleEnum.Artist)
+        if (requestingUser != null && requestingUser.Role != UserRoleEnum.Artist && requestingUser.Role != UserRoleEnum.Admin)
         {
             return ServiceResponse.FromError(new(HttpStatusCode.Forbidden, "Only artists can add artworks!", ErrorCodes.CannotAdd));
         }

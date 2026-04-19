@@ -108,8 +108,10 @@ public class CollectionService(IRepository<WebAppDatabaseContext> repository) : 
         return ServiceResponse.ForSuccess();
     }
 
-    public async Task<ServiceResponse> AddArtworkToCollection(Guid collectionId, Guid artworkId, UserRecord? requestingUser, CancellationToken cancellationToken = default)
+    public async Task<ServiceResponse> AddArtworkToCollection(CollectionArtworkRecord collectionArtwork, UserRecord? requestingUser, CancellationToken cancellationToken = default)
     {
+        var collectionId = collectionArtwork.CollectionId;
+        var artworkId = collectionArtwork.ArtworkId;
         var collection = await repository.GetAsync(new CollectionSpec(collectionId), cancellationToken);
 
         if (collection == null)
@@ -145,8 +147,10 @@ public class CollectionService(IRepository<WebAppDatabaseContext> repository) : 
         return ServiceResponse.ForSuccess();
     }
 
-    public async Task<ServiceResponse> RemoveArtworkFromCollection(Guid collectionId, Guid artworkId, UserRecord? requestingUser, CancellationToken cancellationToken = default)
+    public async Task<ServiceResponse> RemoveArtworkFromCollection(CollectionArtworkRecord collectionArtworkIds, UserRecord? requestingUser, CancellationToken cancellationToken = default)
     {
+        var collectionId = collectionArtworkIds.CollectionId;
+        var artworkId = collectionArtworkIds.ArtworkId;
         var collection = await repository.GetAsync(new CollectionSpec(collectionId), cancellationToken);
 
         if (collection == null)

@@ -16,7 +16,7 @@ public class TagController(ILogger logger, IUserService userService, ITagService
 {
     [Authorize]
     [HttpPost]
-    public async Task<ActionResult<RequestResponse>> Add([FromBody] TagRecord tag)
+    public async Task<ActionResult<RequestResponse>> Add([FromBody] TagAddRecord tag)
     {
         var currentUser = await GetCurrentUser();
         

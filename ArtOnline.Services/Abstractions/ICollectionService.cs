@@ -13,6 +13,6 @@ public interface ICollectionService
     Task<ServiceResponse> AddCollection(CollectionAddRecord collection, UserRecord? requestingUser, CancellationToken cancellationToken = default);
     Task<ServiceResponse> UpdateCollection(CollectionUpdateRecord collection, UserRecord? requestingUser, CancellationToken cancellationToken = default);
     Task<ServiceResponse> DeleteCollection(Guid id, UserRecord? requestingUser, CancellationToken cancellationToken = default);
-    Task<ServiceResponse> AddArtworkToCollection(Guid collectionId, Guid artworkId, UserRecord? requestingUser, CancellationToken cancellationToken = default);
-    Task<ServiceResponse> RemoveArtworkFromCollection(Guid collectionId, Guid artworkId, UserRecord? requestingUser, CancellationToken cancellationToken = default);
+    Task<ServiceResponse> AddArtworkToCollection(CollectionArtworkRecord collectionArtwork, UserRecord? requestingUser, CancellationToken cancellationToken = default);
+    Task<ServiceResponse> RemoveArtworkFromCollection(CollectionArtworkRecord collectionArtwork, UserRecord? requestingUser, CancellationToken cancellationToken = default);
 }

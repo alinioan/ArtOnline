@@ -9,4 +9,6 @@ public class ArtworkRecord
     public int Views { get; set; }
     public int Shares { get; set; }
     public Guid ArtistProfileId { get; set; }
+    public List<Guid>? TagIds { get; set; }
+    public List<Guid>? CollectionIds { get; set; }
 }
