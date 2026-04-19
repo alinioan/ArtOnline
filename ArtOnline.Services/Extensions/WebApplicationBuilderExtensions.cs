@@ -48,6 +48,7 @@ public static class WebApplicationBuilderExtensions
                 .AddScoped<ITagService, TagService>()
                 .AddScoped(typeof(IArtistProfileService), typeof(ArtistProfileService))
                 .AddScoped(typeof(IArtworkLikeService), typeof(ArtworkLikeService))
+                .AddScoped(typeof(IFeedService), typeof(FeedService))
                 .AddScoped<ILoginService, LoginService>()
                 .AddScoped<IFileRepository, FileRepository>()
                 .AddScoped<IUserFileService, UserFileService>()

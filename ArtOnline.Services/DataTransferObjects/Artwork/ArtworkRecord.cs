@@ -8,6 +8,7 @@ public class ArtworkRecord
     public string ImageUrl { get; set; } = null!;
     public int Views { get; set; }
     public int Shares { get; set; }
+    public int Likes { get; set; }
     public Guid ArtistProfileId { get; set; }
     public List<Guid>? TagIds { get; set; }
     public List<Guid>? CollectionIds { get; set; }

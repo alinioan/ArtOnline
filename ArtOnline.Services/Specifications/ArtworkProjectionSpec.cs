@@ -19,6 +19,7 @@ public class ArtworkProjectionSpec : Specification<Artwork, ArtworkRecord>
                 ImageUrl = a.ImageUrl,
                 Shares = a.Shares,
                 Views = a.Views,
+                Likes = a.Likes.Count,
                 ArtistProfileId = a.ArtistProfileId,
                 TagIds = a.ArtworkTags.Select(at => at.TagId).ToList(),
                 CollectionIds = a.CollectionArtworks.Select(ca => ca.CollectionId).ToList()
