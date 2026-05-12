@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="ArtOnline.Api/ArtOnline.Api.csproj" />
+  <Project Path="ArtOnline.Database/ArtOnline.Database.csproj" />
+  <Project Path="ArtOnline.Infrastructure/ArtOnline.Infrastructure.csproj" />
+  <Project Path="ArtOnline.Services/ArtOnline.Services.csproj" />
+</Solution>
