@@ -91,6 +91,7 @@ export const Navbar = () => {
           {/*</Button>}*/}
           {loggedIn && (isAdmin || isArtist) && <ArtworkAddDialog>Create</ArtworkAddDialog>}
           {loggedIn && <ProfileButton className="nav-icon-button"></ProfileButton>}
+
         </div>
       </div>
   );

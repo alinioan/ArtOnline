@@ -4,6 +4,9 @@ import { Feed } from "@presentation/components/ui/Feed/Feed.tsx";
 import { useArtistFeedController } from "@presentation/components/ui/Feed/ArtistFeed.controller.ts";
 import { useAppSelector } from "@application/store.ts";
 import {ArtworkCard} from "@presentation/components/ui/Artwork/ArtworkCard";
+import {IconButton} from "@mui/material";
+import {EditRounded} from "@mui/icons-material";
+import {ArtistProfileUpdateDialog} from "@presentation/components/ui/Dialogs/ArtistProfileUpdateDialog";
 
 export const ArtistPage = memo(() => {
     const { loggedIn } = useAppSelector(x => x.profileReducer);
@@ -66,17 +69,21 @@ export const ArtistPage = memo(() => {
                         </div>
                     </div>
 
-                    <aside className="hidden lg:block lg:w-1/3 museum-panel p-6">
-                        <h2 className="text-xl font-semibold mb-3">Artist profile</h2>
-                        {artistProfile?.response ? (
-                            <div className="space-y-3 text-sm text-gray-800">
-                                <p><strong>ID:</strong> {artistProfile.response.id}</p>
-                                <p><strong>Bio:</strong> {artistProfile.response.bio ?? "No bio available."}</p>
-                                <p><strong>Artwork count:</strong> {artistProfile.response.artworkIds?.length ?? 0}</p>
+                    <aside className="lg:w-1/3 museum-panel p-6">
+                        <div className="flex gap-10 items-start justify-between">
+                            <div className="flex2">
+                                <h3 className="text-xl mb-3">Artist profile</h3>
+                                {artistProfile?.response ? (
+                                    <div className="space-y-3 text-sm text-gray-800">
+                                            <p><strong>Bio:</strong> {artistProfile.response.bio ?? "No bio available."}</p>
+                                        <p><strong>Artwork count:</strong> {artistProfile.response.artworkIds?.length ?? 0}</p>
+                                    </div>
+                                ) : (
+                                    <p className="text-gray-500">Fetching your artist profile data...</p>
+                                )}
                             </div>
-                        ) : (
-                            <p className="text-gray-500">Fetching your artist profile data...</p>
-                        )}
+                            <ArtistProfileUpdateDialog></ArtistProfileUpdateDialog>
+                        </div>
                     </aside>
                 </div>
             )}

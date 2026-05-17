@@ -9,13 +9,25 @@ import { useAppRouter } from "@infrastructure/hooks/useAppRouter";
 import { toast } from "react-toastify";
 import { UserRoleEnum } from "@infrastructure/apis/client";
 import { AppRoute } from "routes";
+import {isUndefined} from "lodash";
 
-const getDefaultValues = () => ({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: ""
-});
+const getDefaultValues = (initialData?: { email: string }) => {
+    const defaultValues = {
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: ""
+    };
+
+    if (!isUndefined(initialData)) {
+        return {
+            ...defaultValues,
+            ...initialData,
+        };
+    }
+
+    return defaultValues;
+};
 
 const useInitRegisterForm = () => {
     const { formatMessage } = useIntl();

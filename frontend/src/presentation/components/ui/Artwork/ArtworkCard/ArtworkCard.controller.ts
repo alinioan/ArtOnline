@@ -1,4 +1,10 @@
-import { useGetArtworkImage, useIncrementArtworkShares, useIncrementArtworkViews, useLikeArtwork } from "@infrastructure/apis/api-management";
+import {
+    useDeleteArtwork,
+    useGetArtworkImage,
+    useIncrementArtworkShares,
+    useIncrementArtworkViews,
+    useLikeArtwork
+} from "@infrastructure/apis/api-management";
 import { ArtworkRecord } from "@infrastructure/apis/client";
 import { useMemo, useEffect, useState, useRef } from "react";
 
@@ -7,6 +13,7 @@ export const useArtworkCardController = (artwork: ArtworkRecord) => {
     const likeMutation = useLikeArtwork();
     const shareMutation = useIncrementArtworkShares();
     const viewMutation = useIncrementArtworkViews();
+    const deleteMutation = useDeleteArtwork();
 
     const [likes, setLikes] = useState(artwork.likes);
     const [shares, setShares] = useState(artwork.shares);
@@ -39,6 +46,14 @@ export const useArtworkCardController = (artwork: ArtworkRecord) => {
         });
     };
 
+    const handleDelete = () => {
+        deleteMutation.mutate(artwork.id, {
+            onSuccess: () => {
+                window.location.reload();
+            },
+        })
+    }
+
     useEffect(() => {
         if (!artwork.id || hasTrackedInitialView.current) {
             return;
@@ -61,5 +76,6 @@ export const useArtworkCardController = (artwork: ArtworkRecord) => {
         views,
         handleLike,
         handleShare,
+        handleDelete,
     };
 };

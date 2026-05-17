@@ -1,5 +1,5 @@
 import { Button, Dialog, DialogContent, DialogTitle } from "@mui/material";
-import { useUserAddDialogController } from "./ArtworkAddDialog.controller.ts";
+import {useArtworkAddDialogController} from "./ArtworkAddDialog.controller.ts";
 import { UserAddForm } from "@presentation/components/forms/User/add/UserAddForm.tsx";
 import { useIntl } from "react-intl";
 import {ArtworkAddForm} from "@presentation/components/forms/Artwork/ArtworkAddForm.tsx";
@@ -8,7 +8,7 @@ import {ArtworkAddForm} from "@presentation/components/forms/Artwork/ArtworkAddF
  * This component wraps the user add form into a modal dialog.
  */
 export const ArtworkAddDialog = () => {
-  const { open, close, isOpen } = useUserAddDialogController();
+  const { open, close, isOpen } = useArtworkAddDialogController();
   const { formatMessage } = useIntl();
 
   return <div>

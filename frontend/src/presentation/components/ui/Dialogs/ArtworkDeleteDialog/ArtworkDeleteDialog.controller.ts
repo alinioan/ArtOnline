@@ -1,5 +1,5 @@
 import { useDialogController } from "../Dialog.controller";
 
-export const useArtworkAddDialogController = () => {
+export const useArtworkDeleteDialogController = () => {
     return useDialogController();
 }

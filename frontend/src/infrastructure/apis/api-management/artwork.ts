@@ -83,6 +83,19 @@ export const useAddArtwork = () => {
     });
 };
 
+export const useDeleteArtwork = () => {
+    const {token} = useAppSelector(x => x.profileReducer);
+    const queryClient = useQueryClient();
+    const api = useMemo(() => getArtworkApiFactory(token), [token]);
+
+    return useMutation({
+        mutationFn: async (artworkId: string) => await api.apiArtworkDeleteIdDelete({id: artworkId}),
+        onSuccess: () => {
+            queryClient.invalidateQueries({queryKey: ["getFeedQuery"]});
+        },
+    });
+}
+
 export const useGetArtworksByArtistProfileId = (
     artistProfileId: string,
     page: number,

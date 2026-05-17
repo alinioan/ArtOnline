@@ -79,6 +79,11 @@ export default function ProfileButton({className}: ProfileButtonProps) {
                             Artist Profile
                         </Link>
                     </MenuItem>}
+                <MenuItem sx={{padding: 0}}>
+                    <Link to={AppRoute.Feedback} className="nav-link px-4 py-2 w-full block">
+                        Feedback
+                    </Link>
+                </MenuItem>
                 <MenuItem onClick={logout} sx={{padding: 0}}>
                     <div className="nav-link px-4 py-2 w-full">Logout</div>
                 </MenuItem>

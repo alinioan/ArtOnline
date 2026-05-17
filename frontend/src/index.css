@@ -42,7 +42,7 @@ body::before {
   z-index: -1;
 }
 
-h1, h2, h3, .museum-title, p {
+h1, h2, h3, .museum-title, p, a {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -64,6 +64,7 @@ h2 {
 }
 
 .museum-panel {
+  color: var(--accent-ivory);
   background: rgba(43, 22, 28, 0.82);
   border: 1px solid rgba(198, 169, 114, 0.18);
   box-shadow: 0 10px 40px rgba(0,0,0,0.35);

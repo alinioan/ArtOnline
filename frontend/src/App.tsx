@@ -11,6 +11,7 @@ import { Route, Routes } from "react-router-dom";
 import { AppRoute } from "routes";
 import {ProfilePage} from "@presentation/pages/ProfilePage.tsx";
 import {ArtistPage} from "@presentation/pages/ArtistPage.tsx";
+import {FeedbackPage} from "@presentation/pages/FeedbackPage.tsx";
 
 export function App() {
   const isAdmin = useOwnUserHasRole(UserRoleEnum.Admin);
@@ -26,6 +27,7 @@ export function App() {
         {isAdmin && <Route path={AppRoute.UserFiles} element={<UserFilesPage />} />}
         <Route path={AppRoute.Profile} element={<ProfilePage />} />
         <Route path={AppRoute.ArtistProfile} element={<ArtistPage />} />
+          <Route path={AppRoute.Feedback} element={<FeedbackPage />} />
       </Routes>
     </AppIntlProvider>
 }
