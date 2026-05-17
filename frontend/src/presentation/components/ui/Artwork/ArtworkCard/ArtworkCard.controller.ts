@@ -9,7 +9,7 @@ import { ArtworkRecord } from "@infrastructure/apis/client";
 import { useMemo, useEffect, useState, useRef } from "react";
 
 export const useArtworkCardController = (artwork: ArtworkRecord) => {
-    const { data: imageBlob } = useGetArtworkImage(artwork.id);
+    const { data: image } = useGetArtworkImage(artwork.id);
     const likeMutation = useLikeArtwork();
     const shareMutation = useIncrementArtworkShares();
     const viewMutation = useIncrementArtworkViews();
@@ -18,9 +18,9 @@ export const useArtworkCardController = (artwork: ArtworkRecord) => {
     const [likes, setLikes] = useState(artwork.likes);
     const [shares, setShares] = useState(artwork.shares);
     const [views, setViews] = useState(artwork.views);
-    const hasTrackedInitialView = useRef(false);
+    const wasSeen = useRef(false);
 
-    const imageUrl = useMemo(() => imageBlob ? URL.createObjectURL(imageBlob) : undefined, [imageBlob]);
+    const imageUrl = useMemo(() => image ? URL.createObjectURL(image) : "", [image]);
 
     useEffect(() => {
         return () => {
@@ -55,11 +55,11 @@ export const useArtworkCardController = (artwork: ArtworkRecord) => {
     }
 
     useEffect(() => {
-        if (!artwork.id || hasTrackedInitialView.current) {
+        if (!artwork.id || wasSeen.current) {
             return;
         }
 
-        hasTrackedInitialView.current = true;
+        wasSeen.current = true;
 
         viewMutation.mutate(artwork.id, {
             onSuccess: () => {

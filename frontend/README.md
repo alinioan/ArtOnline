@@ -1,6 +1,6 @@
-# MobyLabWebProgramming
+# ArtOnline
 
-This is a example application to teach students the basics of web programming.
+Frontend for the online art gallery.
 
 # Prerequisites
 You will need the latest LTS version of NodeJs (https://nodejs.org/en/) and a IDE of you choice, we recommend VSCode (https://code.visualstudio.com/) with plugins for Javascript, Typescript, CSS and SonarLint or WebStorm (https://www.jetbrains.com/webstorm/).
@@ -17,12 +17,6 @@ npm create vite@latest mobylab-web-app --template react-ts
 To generate the REST client for the project each time you modify it run the following command with the backend running:
 
 ```sh
-# for .net8 backend
-openapi-generator-cli generate -i http://localhost:5000/swagger/v1/swagger.json -g typescript-fetch -o ./src/infrastructure/apis/client --additional-properties=supportsES6=true
-```
-
-```sh
-# for .net10 backend
 openapi-generator-cli generate -i http://localhost:5000/openapi/v1.json -g typescript-fetch -o ./src/infrastructure/apis/client --additional-properties=supportsES6=true
 ```
 

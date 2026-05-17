@@ -31,10 +31,11 @@ export const useFeedController = () => {
     useEffect(() => {
         const incomingArtworks = data?.result?.data ?? [];
 
-        if (page === 0 || page === 1) {
+        if (page === 1) {
             setArtworksList(incomingArtworks);
         } else {
             setArtworksList((prev) => {
+                // if we don't use this it loops requesting the last page
                 const existingIds = new Set(prev.map(item => item.id));
                 const uniqueNewItems = incomingArtworks.filter(item => !existingIds.has(item.id));
                 return [...prev, ...uniqueNewItems];
