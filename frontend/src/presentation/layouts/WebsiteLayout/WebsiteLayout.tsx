@@ -13,7 +13,7 @@ export const WebsiteLayout = memo(
     return <div className="flex flex-col min-h-screen">
       <Navbar />
       <MainContent>{children}</MainContent>
-      <Footer />
+      {/*<Footer />*/}
     </div>
   }
 );

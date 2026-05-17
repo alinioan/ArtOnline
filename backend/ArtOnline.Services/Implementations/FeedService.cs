@@ -16,7 +16,7 @@ public class FeedService(IRepository<WebAppDatabaseContext> repository) : IFeedS
         ArtworkOrderEnum order,
         CancellationToken cancellationToken = default)
     {
-        var result = await repository.PageAsync(pagination, new ArtworkFeedSpec(order), cancellationToken);
+        var result = await repository.PageAsync(pagination, new ArtworkFeedSpec(order, pagination.Search), cancellationToken);
 
         return ServiceResponse.ForSuccess(result);
     }

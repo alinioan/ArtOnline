@@ -11,8 +11,13 @@ import {useAppDispatch} from "@application/store.ts";
 import {useAppRouter} from "@infrastructure/hooks/useAppRouter.ts";
 import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import {string} from "yup";
 
-export default function ProfileButton() {
+interface ProfileButtonProps {
+    className?: string
+}
+
+export default function ProfileButton({className}: ProfileButtonProps) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const dispatch = useAppDispatch();
@@ -30,15 +35,14 @@ export default function ProfileButton() {
 
     return (
         <div>
-            <IconButton
+            <IconButton className={className}
                 id="fade-button"
                 aria-controls={open ? 'fade-menu' : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
-                // className="bg-white text-black"
             >
-                <AccountCircle />
+                <AccountCircle/>
             </IconButton>
             <Menu
                 id="fade-menu"
@@ -46,14 +50,29 @@ export default function ProfileButton() {
                     list: {
                         'aria-labelledby': 'fade-button',
                     },
+                    paper: {
+                        sx: {
+                            background: "linear-gradient(to bottom, #241116, #16090d)",
+                            color: "var(--accent-ivory)",
+                            border: "1px solid rgba(198, 169, 114, 0.15)",
+                            backdropFilter: "blur(14px)",
+                            boxShadow: "0 10px 35px rgba(0, 0, 0, 0.28)",
+                        }
+                    }
                 }}
-                slots={{ transition: Fade }}
+                slots={{transition: Fade}}
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
             >
-                <MenuItem href={AppRoute.Profile}> <Link className={"text-black"} to={AppRoute.Profile}>Profile</Link> </MenuItem>
-                <MenuItem onClick={logout}>Logout</MenuItem>
+                <MenuItem href={AppRoute.Profile} sx={{padding: 0}} onClick={handleClose}> 
+                    <Link to={AppRoute.Profile} className="nav-link px-4 py-2 w-full block">
+                        Profile
+                    </Link>
+                </MenuItem>
+                <MenuItem onClick={logout} sx={{padding: 0}}>
+                    <div className="nav-link px-4 py-2 w-full">Logout</div>
+                </MenuItem>
             </Menu>
         </div>
     );

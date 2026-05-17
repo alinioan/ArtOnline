@@ -2,6 +2,7 @@
 using ArtOnline.Database.Repository.Entities;
 using ArtOnline.Database.Repository.Enums;
 using ArtOnline.Services.DataTransferObjects.Artwork;
+using Microsoft.EntityFrameworkCore;
 
 namespace ArtOnline.Services.Specifications;
 
@@ -40,5 +41,19 @@ public class ArtworkFeedSpec : Specification<Artwork, ArtworkRecord>
                 Query.OrderBy(a => Guid.NewGuid());
                 break;
         }
+    }
+
+    public ArtworkFeedSpec(ArtworkOrderEnum order, string? search) : this(order)
+    {
+        search = !string.IsNullOrWhiteSpace(search) ? search.Trim() : null;
+
+        if (search == null)
+        {
+            return;
+        }
+
+        var searchExpr = $"%{search.Replace(" ", "%")}%";
+
+        Query.Where(e => EF.Functions.ILike(e.Title, searchExpr));
     }
 }

@@ -17,7 +17,7 @@ const LanguageAPIContext = createContext<LanguageAPI>({} as LanguageAPI);
  */
 export const LanguageContextProvider = ({ children }: PropsWithChildren) => {
   const [state, dispatch] = useReducer(languageContextReducer, {
-    selectedLanguage: SupportedLanguage.RO,
+    selectedLanguage: SupportedLanguage.EN,
   });
 
   const api: LanguageAPI = useMemo(() => {

@@ -11,6 +11,8 @@ export * from './CollectionRecord';
 export * from './CollectionUpdateRecord';
 export * from './ErrorCodes';
 export * from './ErrorMessage';
+export * from './FeedbackOptionRecord';
+export * from './FeedbackSubmitRecord';
 export * from './HttpStatusCode';
 export * from './LoginRecord';
 export * from './LoginResponseRecord';

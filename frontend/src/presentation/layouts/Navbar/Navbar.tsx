@@ -15,6 +15,7 @@ import { useOwnUserHasRole } from '@infrastructure/hooks/useOwnUser';
 import { UserRoleEnum } from '@infrastructure/apis/client';
 import {MenuSharp} from "@mui/icons-material";
 import ProfileButton from "@presentation/components/ui/ProfileButton/ProfileButton.tsx";
+import {ArtworkAddDialog} from "@presentation/components/ui/Dialogs/ArtworkAddDialog";
 
 /**
  * This is the navigation menu that will stay at the top of the page.
@@ -23,6 +24,7 @@ export const Navbar = () => {
   const {formatMessage} = useIntl();
   const {loggedIn} = useAppSelector(x => x.profileReducer);
   const isAdmin = useOwnUserHasRole(UserRoleEnum.Admin);
+  const isArtist = useOwnUserHasRole(UserRoleEnum.Artist);
   const dispatch = useAppDispatch();
   const {redirectToHome} = useAppRouter();
   const logout = useCallback(() => {
@@ -53,21 +55,23 @@ export const Navbar = () => {
 
   const MenuList = () => (
       <div
-          className="flex flex-col lg:flex-row lg:items-center text-white gap-2 bg-app-blue h-full pt-10 px-4 lg:pt-0 lg:px-0 min-w-[260px]">
+          className="flex flex-col lg:flex-row lg:items-center h-full pt-10 px-6 lg:pt-0 lg:px-0 min-w-[260px] lg:bg-transparent lg:border-none"
+      >
+
         {isAdmin &&
             <> { /*If the user is logged in and it is an admin they can have new menu items shown.*/ }
-              <div className="flex flex-col lg:flex-row items-center gap-2 border-b-2 border-white lg:border-none pb-4 lg:pb-0 hover:bg-app-dark-blue rounded-md">
+              <div className="flex flex-col lg:flex-row items-center gap-2 border-b-2 border-white lg:border-none pb-4 lg:pb-0 rounded-md">
                 <Link
                     to={AppRoute.Users}
-                    className="p-4 font-semibold text-center text-white"
+                    className="nav-link px-4 py-2"
                 >
                   {formatMessage({id: "globals.users"})}
                 </Link>
               </div>
-              <div className="flex flex-col lg:flex-row items-center gap-2 border-b-2 border-white lg:border-none pb-4 lg:pb-0 hover:bg-app-dark-blue rounded-md">
+              <div className="flex flex-col lg:flex-row items-center gap-2 border-b-2 border-white lg:border-none pb-4 lg:pb-0 rounded-md">
                 <Link
                     to={AppRoute.UserFiles}
-                    className="p-4 font-semibold text-center text-white"
+                    className="nav-link px-4 py-2"
                 >
                   {formatMessage({id: "globals.files"})}
                 </Link>
@@ -76,46 +80,71 @@ export const Navbar = () => {
         }
 
         <div className="ml-auto p-4 flex flex-col lg:flex-row lg:items-center gap-5">
-          <NavbarLanguageSelector/>
-          {!loggedIn && <Button color="inherit">  {/* If the user is not logged in show a button that redirects to the login page. */}
-            <Link className="text-white" to={AppRoute.Login}>
+          {/*<NavbarLanguageSelector color="inherit"/>*/}
+          {!loggedIn && <Button className="nav-icon-button px-5" color="inherit">  {/* If the user is not logged in show a button that redirects to the login page. */}
+            <Link className="nav-link" to={AppRoute.Login}>
               {formatMessage({id: "globals.login"})}
             </Link>
           </Button>}
           {/*{loggedIn && <Button onClick={logout} color="inherit"> /!* Otherwise show the logout button. *!/*/}
           {/*  {formatMessage({id: "globals.logout"})}*/}
           {/*</Button>}*/}
-          {loggedIn && <ProfileButton></ProfileButton>}
+          {loggedIn && (isAdmin || isArtist) && <ArtworkAddDialog>Create</ArtworkAddDialog>}
+          {loggedIn && <ProfileButton className="nav-icon-button"></ProfileButton>}
         </div>
       </div>
   );
 
   return (
       <div className="w-full">
-        <div className="w-full top-0 z-50 fixed bg-app-blue" ref={menuRef}>
-          <div className="px-2 flex items-center text-white gap-2">
+        <div
+            className="w-full top-0 z-50 fixed navbar-glass relative"
+            ref={menuRef}
+        >
+          <div className="px-8 py-3 flex items-center gap-8">
             <Link className="shrink-0 h-10 w-10"
                 to={AppRoute.Index}> {/* Add a button to redirect to the home page. */}
-              <IconButton>
-                <HomeIcon style={{color: 'white'}} fontSize='large'/>
+              <IconButton className="nav-icon-button">
+                <HomeIcon
+                    sx={{
+                      color: "var(--accent-ivory)",
+                      fontSize: 28
+                    }}
+                />
               </IconButton>
             </Link>
+            <div className="navbar-title hidden md:block">
+              Art Online
+            </div>
 
-            <div className="px-5 w-full hidden lg:block">{MenuList()}</div>
+            <div className="w-full hidden lg:block">
+              {MenuList()}
+            </div>
 
             <div className="block lg:hidden ml-auto py-2">
               <Button
                   onClick={toggleDrawer(true)}
                   className="rounded-md bg-white px-3 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
               >
-                <MenuSharp/>
+                <MenuSharp sx={{ color: "var(--accent-ivory)" }} />
               </Button>
-              <Drawer open={toggleMenu} onClose={toggleDrawer(false)}>
+              <Drawer
+                  open={toggleMenu}
+                  onClose={toggleDrawer(false)}
+                  PaperProps={{
+                    sx: {
+                      background:
+                          "linear-gradient(to bottom, #241116, #16090d)",
+                      color: "var(--accent-ivory)",
+                      borderLeft:
+                          "1px solid rgba(198,169,114,0.15)"
+                    }
+                  }}
+              >
                 {MenuList()}
               </Drawer>
             </div>
           </div>
-          <div className="bg-app-dark-blue min-h-1.5"/>
         </div>
         <div className={`w-full top-0 z-49`} style={{height: height ?? 80}}/>
       </div>

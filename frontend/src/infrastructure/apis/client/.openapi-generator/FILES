@@ -4,6 +4,7 @@ apis/ArtworkLikeApi.ts
 apis/AuthorizationApi.ts
 apis/CollectionApi.ts
 apis/FeedApi.ts
+apis/FeedbackFormApi.ts
 apis/TagApi.ts
 apis/UserApi.ts
 apis/UserFileApi.ts
@@ -20,6 +21,8 @@ models/CollectionRecord.ts
 models/CollectionUpdateRecord.ts
 models/ErrorCodes.ts
 models/ErrorMessage.ts
+models/FeedbackOptionRecord.ts
+models/FeedbackSubmitRecord.ts
 models/HttpStatusCode.ts
 models/LoginRecord.ts
 models/LoginResponseRecord.ts
