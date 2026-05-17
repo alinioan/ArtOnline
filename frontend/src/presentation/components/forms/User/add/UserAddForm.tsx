@@ -10,7 +10,7 @@ import {
     MenuItem
 } from "@mui/material";
 import { FormattedMessage, useIntl } from "react-intl";
-import { useUserAddFormController } from "./UserAddForm.controller";
+import { useUserAddFormController } from "./UserAddForm.controller.ts";
 import { isEmpty, isUndefined } from "lodash";
 import { UserRoleEnum } from "@infrastructure/apis/client";
 

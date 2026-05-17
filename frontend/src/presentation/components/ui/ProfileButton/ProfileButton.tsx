@@ -12,6 +12,8 @@ import {useAppRouter} from "@infrastructure/hooks/useAppRouter.ts";
 import IconButton from '@mui/material/IconButton';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import {string} from "yup";
+import {useOwnUserHasRole} from "@infrastructure/hooks/useOwnUser.ts";
+import {UserRoleEnum} from "@infrastructure/apis/client";
 
 interface ProfileButtonProps {
     className?: string
@@ -22,6 +24,7 @@ export default function ProfileButton({className}: ProfileButtonProps) {
     const open = Boolean(anchorEl);
     const dispatch = useAppDispatch();
     const {redirectToHome} = useAppRouter();
+    const isArtist = useOwnUserHasRole(UserRoleEnum.Artist);
     const logout = useCallback(() => {
         dispatch(resetProfile());
         redirectToHome();
@@ -70,6 +73,12 @@ export default function ProfileButton({className}: ProfileButtonProps) {
                         Profile
                     </Link>
                 </MenuItem>
+                {isArtist &&
+                    <MenuItem href={AppRoute.ArtistProfile} sx={{padding: 0}} onClick={handleClose}>
+                        <Link to={AppRoute.ArtistProfile} className="nav-link px-4 py-2 w-full block">
+                            Artist Profile
+                        </Link>
+                    </MenuItem>}
                 <MenuItem onClick={logout} sx={{padding: 0}}>
                     <div className="nav-link px-4 py-2 w-full">Logout</div>
                 </MenuItem>

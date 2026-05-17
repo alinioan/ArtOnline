@@ -1,6 +1,6 @@
 import { Button, Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { useUserAddDialogController } from "./ArtworkAddDialog.controller.ts";
-import { UserAddForm } from "@presentation/components/forms/User/UserAddForm";
+import { UserAddForm } from "@presentation/components/forms/User/add/UserAddForm.tsx";
 import { useIntl } from "react-intl";
 import {ArtworkAddForm} from "@presentation/components/forms/Artwork/ArtworkAddForm.tsx";
 

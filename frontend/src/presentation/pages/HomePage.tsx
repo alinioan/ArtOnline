@@ -37,7 +37,7 @@ export const HomePage = memo(() => {
           {!loggedIn && (
             <div className="flex items-center justify-center min-h-[40vh]">
               <div className="museum-panel p-12 w-full max-w-md">
-                <h1 className="text-center mb-8 text-5xl">Welcome!</h1>
+                <h1 className="museum-title text-center mb-8 text-5xl">Welcome!</h1>
                 <div className="flex flex-col gap-10">
                   <button
                     onClick={() => navigate(AppRoute.Login)}

@@ -1,8 +1,9 @@
 import { useAppSelector } from "@application/store";
-import { Configuration, ArtistProfileApi } from "@infrastructure/apis/client";
-import { useQuery } from "@tanstack/react-query";
+import { Configuration, ArtistProfileApi, ArtistProfileAddRecord } from "@infrastructure/apis/client";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const getArtistProfileQueryKey = "getArtistProfileQuery";
+const addArtistProfileMutationKey = "addArtistProfileMutation";
 
 const getArtistProfileApiFactory = (token: string | null) => new ArtistProfileApi(new Configuration({ accessToken: token ?? "" }));
 
@@ -19,4 +20,19 @@ export const useGetArtistProfileByUserId = (userId: string | null) => {
         }),
         queryKey: getArtistProfileQueryKey
     };
+};
+
+export const useAddArtistProfile = () => {
+    const { token } = useAppSelector(x => x.profileReducer);
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationKey: [addArtistProfileMutationKey, token],
+        mutationFn: async (artistProfileAddRecord: ArtistProfileAddRecord) => {
+            const result = await getArtistProfileApiFactory(token).apiArtistProfileAddPost({ artistProfileAddRecord });
+            await queryClient.invalidateQueries({ queryKey: [getArtistProfileQueryKey], type: "all" });
+
+            return result;
+        }
+    });
 };

@@ -12,7 +12,8 @@ export const Feed = ({
      setSearchInput,
      onSearchSubmit,
      sort,
-     setSort
+     setSort,
+    girdSize
 }: Props) => {
     const observerTarget = useRef<HTMLDivElement | null>(null);
 
@@ -39,8 +40,6 @@ export const Feed = ({
 
     return (
         <div className="feed-panel space-y-6">
-
-            {/* Flex Control Header Container */}
             <div className="flex flex-wrap gap-2 justify-between items-center">
                 <form
                     onSubmit={(e) => { e.preventDefault(); onSearchSubmit(); }}
@@ -73,14 +72,12 @@ export const Feed = ({
                 </select>
             </div>
 
-            {/* Grid Area */}
             <div className="feed-scroll-area grid grid-cols-1 md:grid-cols-3 gap-5">
                 {artworks.map((art) => (
                     <ArtworkCard key={art.id} artwork={art} />
                 ))}
             </div>
 
-            {/* Invisible Tripwire + Loading States */}
             <div ref={observerTarget} className="h-10 mt-8 flex items-center justify-center text-gray-500 text-sm">
                 {loading && <p>Loading more masterpieces...</p>}
                 {!hasMore && artworks.length > 0 && <p>You've viewed all available artwork.</p>}

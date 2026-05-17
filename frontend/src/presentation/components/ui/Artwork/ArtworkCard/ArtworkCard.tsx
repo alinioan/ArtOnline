@@ -4,9 +4,12 @@ import IconButton from '@mui/material/IconButton';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ShareOutlinedIcon from '@mui/icons-material/ShareOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import DeleteIcon from "@mui/icons-material/Delete";
+import {DeleteForever} from "@mui/icons-material";
+import {boolean} from "yup";
 
-export const ArtworkCard = ({ artwork }: { artwork: ArtworkRecord }) => {
-    const { imageUrl, likes, shares, views, handleLike, handleShare, isActionLoading } = useArtworkCardController(artwork);
+export const ArtworkCard = ({artwork, hasDelete}: { artwork: ArtworkRecord, hasDelete?: boolean }) => {
+    const { imageUrl, likes, shares, views, handleLike, handleShare } = useArtworkCardController(artwork);
 
     return (
         <div className="museum-panel p-4 border rounded-lg shadow-md flex flex-col h-full">
@@ -49,7 +52,6 @@ export const ArtworkCard = ({ artwork }: { artwork: ArtworkRecord }) => {
                     size="small"
                     color="primary"
                     onClick={handleLike}
-                    disabled={isActionLoading}
                     className="border border-gray-300"
                 >
                     <ThumbUpOutlinedIcon />
@@ -58,11 +60,18 @@ export const ArtworkCard = ({ artwork }: { artwork: ArtworkRecord }) => {
                     size="small"
                     color="primary"
                     onClick={handleShare}
-                    disabled={isActionLoading}
                     className="border border-gray-300"
                 >
                     <ShareOutlinedIcon />
                 </IconButton>
+                {hasDelete && <IconButton
+                    size="small"
+                    color="primary"
+                    onClick={handleShare}
+                    className="border border-gray-300"
+                >
+                    <DeleteForever></DeleteForever>
+                </IconButton>}
             </div>
         </div>
     );

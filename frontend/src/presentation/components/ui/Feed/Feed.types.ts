@@ -10,4 +10,6 @@ export interface Props {
     onSearchSubmit: () => void;
     sort: ArtworkOrderEnum;
     setSort: (value: ArtworkOrderEnum) => void;
+
+    girdSize?: number;
 }

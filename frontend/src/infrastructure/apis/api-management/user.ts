@@ -1,5 +1,5 @@
 import {useAppSelector} from "@application/store";
-import {Configuration, UserAddRecord, UserApi} from "../client";
+import {Configuration, UserAddRecord, UserUpdateRecord, UserApi} from "../client";
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {isEmpty} from "lodash";
 
@@ -9,6 +9,7 @@ import {isEmpty} from "lodash";
 const getUsersQueryKey = "getUsersQuery";
 const getUserQueryKey = "getUserQuery";
 const addUserMutationKey = "addUserMutation";
+const updateUserMutationKey = "updateUserMutation";
 const deleteUserMutationKey = "deleteUserMutation";
 
 const getFactory = (token: string | null) => new UserApi(new Configuration({accessToken: token ?? ""}));
@@ -50,6 +51,22 @@ export const useAddUser = () => {
         mutationKey: [addUserMutationKey, token],
         mutationFn: async (userAddRecord: UserAddRecord) => {
             const result = await getFactory(token).apiUserAddPost({userAddRecord});
+            await queryClient.invalidateQueries({queryKey: [getUsersQueryKey], type: "all"});  // If the form submission succeeds then some other queries need to be refresh so invalidate them to do a refresh.
+            await queryClient.invalidateQueries({queryKey: [getUserQueryKey], type: "all"});
+
+            return result;
+        }
+    })
+}
+
+export const useUpdateUser = () => {
+    const {token} = useAppSelector(x => x.profileReducer); // You can use the data form the Redux storage.
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationKey: [updateUserMutationKey, token],
+        mutationFn: async (userUpdateRecord: UserUpdateRecord) => {
+            const result = await getFactory(token).apiUserUpdatePut({userUpdateRecord});
             await queryClient.invalidateQueries({queryKey: [getUsersQueryKey], type: "all"});  // If the form submission succeeds then some other queries need to be refresh so invalidate them to do a refresh.
             await queryClient.invalidateQueries({queryKey: [getUserQueryKey], type: "all"});
 

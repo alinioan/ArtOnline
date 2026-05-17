@@ -10,6 +10,7 @@ import { UsersPage } from "@presentation/pages/UsersPage";
 import { Route, Routes } from "react-router-dom";
 import { AppRoute } from "routes";
 import {ProfilePage} from "@presentation/pages/ProfilePage.tsx";
+import {ArtistPage} from "@presentation/pages/ArtistPage.tsx";
 
 export function App() {
   const isAdmin = useOwnUserHasRole(UserRoleEnum.Admin);
@@ -24,6 +25,7 @@ export function App() {
         {isAdmin && <Route path={AppRoute.Users} element={<UsersPage />} />} {/* If the user doesn't have the right role this route shouldn't be used. */}
         {isAdmin && <Route path={AppRoute.UserFiles} element={<UserFilesPage />} />}
         <Route path={AppRoute.Profile} element={<ProfilePage />} />
+        <Route path={AppRoute.ArtistProfile} element={<ArtistPage />} />
       </Routes>
     </AppIntlProvider>
 }

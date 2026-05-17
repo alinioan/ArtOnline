@@ -1,5 +1,5 @@
 import { UserRoleEnum } from "@infrastructure/apis/client";
-import { FormController } from "../FormController";
+import { FormController } from "../../FormController.ts";
 import {
     UseFormHandleSubmit,
     UseFormRegister,

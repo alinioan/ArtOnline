@@ -5,6 +5,7 @@ import { useMemo } from "react";
 
 const getArtworkImageQueryKey = "getArtworkImageQuery";
 const getArtworkApiQueryKey = "getArtworkApiQuery";
+const getArtworksByArtistProfileQueryKey = "getArtworksByArtistProfileQuery";
 
 const getArtworkApiFactory = (token: string | null) => new ArtworkApi(new Configuration({ accessToken: token ?? "" }));
 const getArtworkLikeApiFactory = (token: string | null) => new ArtworkLikeApi(new Configuration({ accessToken: token ?? "" }));
@@ -80,4 +81,33 @@ export const useAddArtwork = () => {
             queryClient.invalidateQueries({ queryKey: ["getFeedQuery"] });
         },
     });
+};
+
+export const useGetArtworksByArtistProfileId = (
+    artistProfileId: string,
+    page: number,
+    pageSize: number,
+    search: string = "",
+    enabled: boolean = true,
+) => {
+    const { token } = useAppSelector(x => x.profileReducer);
+
+    return {
+        ...useQuery({
+            queryKey: [getArtworksByArtistProfileQueryKey, token, artistProfileId, page, pageSize, search],
+            queryFn: async () => {
+                const response = await getArtworkApiFactory(token).apiArtworkGetByArtistProfileArtistProfileIdGetRaw({
+                    artistProfileId,
+                    page,
+                    pageSize,
+                    search,
+                });
+                return await response.raw.json();
+            },
+            enabled: enabled,
+            refetchInterval: Infinity,
+            refetchOnWindowFocus: false,
+        }),
+        queryKey: getArtworksByArtistProfileQueryKey,
+    };
 };

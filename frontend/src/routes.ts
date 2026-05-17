@@ -7,5 +7,6 @@ export enum AppRoute {
     Register = "/register",
     Users = "/users",
     UserFiles = "/user-files",
-    Profile = "/profile"
+    Profile = "/profile",
+    ArtistProfile = "/artist"
 }

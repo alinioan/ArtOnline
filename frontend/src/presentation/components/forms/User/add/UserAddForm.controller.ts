@@ -1,4 +1,4 @@
-import { UserAddFormController, UserAddFormModel } from "./UserAddForm.types";
+import { UserAddFormController, UserAddFormModel } from "./UserAddForm.types.ts";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useIntl } from "react-intl";
 import * as yup from "yup";
